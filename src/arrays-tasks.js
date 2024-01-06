@@ -432,8 +432,16 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,1,0],
  *                              [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  const arr = [];
+  arr.length = n;
+  arr.fill(0);
+  const matrix = [];
+  matrix.length = n;
+  matrix.fill(arr);
+  return matrix.map((item, index) =>
+    item.map((el, ind) => (ind === index ? el + 1 : el))
+  );
 }
 
 /**
@@ -447,8 +455,13 @@ function getIdentityMatrix(/* n */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  const resArr = [];
+  numbers.map((item, index) => {
+    if (item % 2) resArr.push(index);
+    return '';
+  });
+  return resArr;
 }
 
 /**
@@ -461,8 +474,10 @@ function getIndicesOfOddNumbers(/* numbers */) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  return arr.map(
+    (item) => `#${item.toString(16).toUpperCase().padStart(6, 0)}`
+  );
 }
 
 /**
@@ -479,8 +494,11 @@ function getHexRGBValues(/* arr */) {
  *   getMaxItems([ 10, 2, 7, 5, 3, -5 ], 3) => [ 10, 7, 5 ]
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
-function getMaxItems(/* arr, n */) {
-  throw new Error('Not implemented');
+function getMaxItems(arr, n) {
+  if (arr.length === 0) return arr;
+  const resArr = arr.sort((a, b) => b - a);
+  resArr.length = n;
+  return resArr;
 }
 
 /**
@@ -495,8 +513,16 @@ function getMaxItems(/* arr, n */) {
  *    findCommonElements(['a', 'b', 'c'], ['b', 'c', 'd']) => [ 'b', 'c' ]
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
-function findCommonElements(/* arr1, arr2 */) {
-  throw new Error('Not implemented');
+function findCommonElements(arr1, arr2) {
+  const resArr = [];
+  arr1.map((item) => {
+    arr2.map((item2) => {
+      if (item === item2) resArr.push(item);
+      return '';
+    });
+    return '';
+  });
+  return resArr;
 }
 
 /**
@@ -510,10 +536,21 @@ function findCommonElements(/* arr1, arr2 */) {
  *    findLongestIncreasingSubsequence([3, 10, 2, 1, 20]) => 2
  *    findLongestIncreasingSubsequence([50, 3, 10, 7, 40, 80]) => 3
  */
-function findLongestIncreasingSubsequence(/* nums */) {
-  throw new Error('Not implemented');
+function findLongestIncreasingSubsequence(nums) {
+  let resArr = [];
+  let res = 0;
+  nums.map((item, index) => {
+    if (item < nums[index + 1]) {
+      if (resArr[resArr.length - 1] !== item) resArr.push(item);
+      resArr.push(nums[index + 1]);
+    } else {
+      if (resArr.length > res) res = resArr.length;
+      resArr = [];
+    }
+    return '';
+  });
+  return res;
 }
-
 /**
  * Propagates every item in sequence its position times
  * Returns an array that consists of: one first item, two second items, three third items etc.
